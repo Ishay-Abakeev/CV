@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ishay Abakeev — Computer Science graduate focused on backend development and systems programming. Explore Java, SQL, C, C++, Python and C# projects." />
+  <meta name="theme-color" content="#0f172a" />
+  <meta property="og:title" content="Ishay Abakeev — Backend & Systems Developer" />
+  <meta property="og:description" content="Backend, systems programming, databases and security projects by a Computer Science graduate." />
+  <meta property="og:type" content="website" />
+  <title>Ishay Abakeev | Junior Backend & Software Developer</title>
+  <meta name="color-scheme" content="light dark" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Heebo', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', 'Heebo', system-ui, -apple-system, sans-serif;
+    }
+    html { scroll-padding-top: 5.5rem; }
+    :focus-visible { outline: 3px solid #818cf8; outline-offset: 3px; border-radius: 6px; }
+    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; transform: translateY(-160%); padding: .7rem 1rem; border-radius: .75rem; background: #312e81; color: #fff; font-weight: 700; }
+    .skip-link:focus { transform: translateY(0); }
+    [dir="rtl"] .skip-link { left: auto; right: .75rem; }
+    .modal-open { overflow: hidden; }
+    .code-grid {
+      background-image: radial-gradient(rgba(99, 102, 241, 0.14) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .code-grid {
+      background-image: radial-gradient(rgba(129, 140, 248, 0.16) 1px, transparent 1px);
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 80ms; }
+    .reveal-delay-2 { transition-delay: 160ms; }
+    .reveal-delay-3 { transition-delay: 240ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Subtle card hover lift & glow */
+    .interactive-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .interactive-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px -12px rgba(79, 70, 229, 0.18);
+    }
+    .dark .interactive-card:hover {
+      box-shadow: 0 14px 30px -12px rgba(99, 102, 241, 0.25);
+    }
+
+    @media print {
+      .no-print, header, #scrollProgress, #projectModal, #toast { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      body, .dark body { background: #fff !important; color: #0f172a !important; }
+      main { max-width: 100% !important; padding: 0 !important; }
+      section { break-inside: auto; padding-top: .8rem !important; padding-bottom: .8rem !important; }
+      article, .print-card { break-inside: avoid; border: 1px solid #cbd5e1 !important; box-shadow: none !important; background: #fff !important; color: #0f172a !important; }
+      a { color: #1d4ed8 !important; text-decoration: underline !important; }
+      .interactive-card { transform: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 antialiased">
+  <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Skip to content</a>
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="no-print fixed top-0 left-0 right-0 z-50 h-1 bg-transparent pointer-events-none">
+    <div id="scrollProgress" class="h-full w-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-emerald-500 transition-[width] duration-75"></div>
+  </div>
+
+  <!-- Sticky Navigation -->
+  <header class="no-print sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <a href="#mainContent" class="flex items-center gap-2.5 font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white shrink-0">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-white flex items-center justify-center font-mono text-sm shadow-sm">IA</span>
+        <span data-i18n="brandName">Ishay Abakeev</span>
+      </a>
+
+      <nav id="desktopNav" class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#about" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navAbout">About</a>
+        <a href="#projects" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navProjects">Projects</a>
+        <a href="#engineering" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navEngineering">Engineering</a>
+        <a href="#beyond" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navBeyond">Beyond CV</a>
+        <a href="#skills" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navSkills">Skills</a>
+        <a href="#experience" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navExperience">Experience</a>
+        <a href="#contact" class="nav-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="langToggle" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Switch language" aria-pressed="false">
+          עב / EN
+        </button>
+        <button id="themeToggle" type="button" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle dark mode" aria-pressed="false">
+          <svg id="sunIcon" class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="moonIcon" class="w-4 h-4 block dark:hidden text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button id="printBtn" type="button" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span data-i18n="btnPrint">Save PDF</span>
+        </button>
+        <button id="mobileMenuBtn" type="button" class="md:hidden p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobileMenu" hidden class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-3 space-y-2 text-sm font-medium">
+      <a href="#about" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navAbout">About</a>
+      <a href="#projects" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navProjects">Projects</a>
+      <a href="#engineering" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navEngineering">Engineering</a>
+      <a href="#beyond" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navBeyond">Beyond CV</a>
+      <a href="#skills" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navSkills">Skills</a>
+      <a href="#experience" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navExperience">Experience</a>
+      <a href="#contact" class="mobile-nav-link block py-1.5 text-slate-700 dark:text-slate-200" data-i18n="navContact">Contact</a>
+      <button id="mobilePrintBtn" type="button" class="w-full mt-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-600 text-white">
+        <span data-i18n="btnPrint">Save PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="mainContent" class="max-w-5xl mx-auto px-4 sm:px-6 pb-20">
+
+    <!-- Hero Section -->
+    <section id="about" class="pt-10 sm:pt-14 pb-10">
+      <div class="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-sm code-grid print-card">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+          <div class="space-y-4 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200/70 dark:border-indigo-800/70">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span data-i18n="availabilityBadge">Open to Junior Backend / Software Developer Roles</span>
+            </div>
+
+            <div>
+              <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="heroName">
+                Ishay Abakeev
+              </h1>
+              <p class="mt-2 text-lg sm:text-xl font-semibold text-indigo-600 dark:text-indigo-400" data-i18n="heroRole">
+                B.Sc. Computer Science Graduate • Backend & Systems Developer
+              </p>
+            </div>
+
+            <p class="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300" data-i18n="heroBio">
+              Computer Science graduate from The Open University of Israel with hands-on experience building Java backend APIs, database-driven applications, and systems-level projects. Strong foundation in algorithms, data structures, SQL, authentication, and low-level programming, alongside experience teaching computer science.
+            </p>
+
+            <!-- Primary Links -->
+            <div class="no-print flex flex-wrap items-center gap-2.5 pt-2">
+              <a href="https://github.com/Ishay-Abakeev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 transition-all hover:-translate-y-0.5 shadow-sm">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/ishay-abakeev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#0A66C2] hover:bg-[#004182] text-white transition-all hover:-translate-y-0.5 shadow-sm">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                LinkedIn
+              </a>
+              <a href="mailto:ishay.abakeev@gmail.com" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:-translate-y-0.5">
+                <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span data-i18n="btnEmail">Email Me</span>
+              </a>
+              <button id="copyEmailBtn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span data-i18n="btnCopyEmail">Copy Email</span>
+              </button>
+              <a href="https://ishay-abakeev.github.io/courses" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800 transition-colors">
+                <span data-i18n="btnCourses">CS Courses Site</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Interactive Code / Developer Terminal Card -->
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 text-slate-100 p-5 lg:w-[340px] shrink-0 shadow-lg font-mono text-xs" dir="ltr">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              </div>
+              <span class="text-[11px] text-slate-400">ishay_profile.json</span>
+            </div>
+            <pre class="leading-relaxed overflow-x-auto text-[11.5px]"><code><span class="text-slate-400">{</span>
+  <span class="text-indigo-400">"role"</span>: <span class="text-emerald-400">"Backend / SWE"</span>,
+  <span class="text-indigo-400">"degree"</span>: <span class="text-emerald-400">"B.Sc. CS (OpenU)"</span>,
+  <span class="text-indigo-400">"stack"</span>: [
+    <span class="text-amber-300">"Java"</span>, <span class="text-amber-300">"C#"</span>, <span class="text-amber-300">"C/C++"</span>,
+    <span class="text-amber-300">"Python"</span>, <span class="text-amber-300">"SQL"</span>
+  ],
+  <span class="text-indigo-400">"focus"</span>: <span class="text-emerald-400">"Backend & Systems"</span>,
+  <span class="text-indigo-400">"languages"</span>: [<span class="text-amber-300">"Hebrew"</span>, <span class="text-amber-300">"English"</span>]
+<span class="text-slate-400">}</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-10 reveal">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="projectsTitle">Technical Projects</h2>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-400" data-i18n="projectsSubtitle">
+            Selected projects demonstrating backend development, data access, authentication, systems programming, and security.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div id="projectFilters" class="no-print flex flex-wrap gap-1.5 bg-slate-200/70 dark:bg-slate-800/80 p-1 rounded-xl">
+          <button type="button" data-filter="all" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm transition-all" data-i18n="filterAll">All (6)</button>
+          <button type="button" data-filter="backend" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all" data-i18n="filterBackend">Backend & Web</button>
+          <button type="button" data-filter="systems" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all" data-i18n="filterSystems">Systems & Desktop</button>
+          <button type="button" data-filter="security" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all" data-i18n="filterSecurity">Security & Protocols</button>
+        </div>
+      </div>
+
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5" aria-live="polite"></div>
+    </section>
+
+    <!-- Engineering Deep Dive -->
+    <section id="engineering" class="py-10 reveal">
+      <div class="mb-6">
+        <span class="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 mb-2" data-i18n="engineeringBadge">Technical walkthrough</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="engineeringTitle">Engineering Deep Dive</h2>
+        <p class="mt-1 text-sm text-slate-600 dark:text-slate-400 max-w-3xl" data-i18n="engineeringIntro">A closer look at the architecture of selected projects, the boundaries between components, and key edge cases in each domain.</p>
+      </div>
+
+      <div class="space-y-5">
+        <article class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 sm:p-6 print-card">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="deepTag1">01 · Backend / Team project</p>
+              <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">TokenLearn</h3>
+            </div>
+            <div class="flex items-center gap-3">
+              <a class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline" href="https://github.com/Ishay-Abakeev/TokenLearn/blob/main/API_REQUESTS.md" target="_blank" rel="noopener noreferrer" data-i18n="btnApiDocsLink">API Docs ↗</a>
+              <a class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline" href="https://github.com/Ishay-Abakeev/TokenLearn" target="_blank" rel="noopener noreferrer" data-i18n="btnSourceCode">Source code ↗</a>
+            </div>
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-i18n="tokenDeep">The backend exposes REST APIs, uses Java with Spring Framework, and separates SQL persistence behind JDBC/DAO. The application includes token-balance operations and JWT / Google OAuth 2.0 authentication for a React client.</p>
+          <div class="mt-4 rounded-xl bg-slate-950 p-4 text-center text-xs font-mono text-slate-100" dir="ltr">
+            <div class="grid grid-cols-1 sm:grid-cols-5 items-center gap-2">
+              <div class="rounded-lg border border-slate-700 bg-slate-900/90 p-3">
+                <b class="text-white">React 19 SPA</b>
+                <small class="block text-slate-400 mt-0.5">Vite Client</small>
+              </div>
+              <div class="text-indigo-400 font-semibold">HTTP / JWT →</div>
+              <div class="rounded-lg border border-slate-700 bg-slate-900/90 p-3">
+                <b class="text-white">Java / Spring</b>
+                <small class="block text-slate-400 mt-0.5">REST + Service Layer</small>
+              </div>
+              <div class="text-indigo-400 font-semibold">JDBC / DAO →</div>
+              <div class="rounded-lg border border-slate-700 bg-slate-900/90 p-3">
+                <b class="text-white">SQL Database</b>
+                <small class="block text-slate-400 mt-0.5">Transactional Storage</small>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 grid sm:grid-cols-2 gap-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" data-i18n="designDecision">Design focus</h4>
+              <p class="mt-1 text-sm text-slate-700 dark:text-slate-200" data-i18n="tokenDecision">Keeping data access separate from API and business logic, and treating token balance changes as atomic transactional operations.</p>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" data-i18n="validationIdeas">Key edge cases & invariants</h4>
+              <ul class="mt-1 list-disc list-inside space-y-1 text-sm text-slate-700 dark:text-slate-200">
+                <li data-i18n="tokenTest1">Reject a transfer when the sender has insufficient token balance.</li>
+                <li data-i18n="tokenTest2">Ensure both balances update atomically together, or roll back on failure.</li>
+                <li data-i18n="tokenTest3">Guard against missing user records and concurrent balance updates.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <div class="grid md:grid-cols-2 gap-5">
+          <article class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 print-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="deepTag2">02 · Systems / ANSI C</p>
+                  <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">Two-Pass Assembler</h3>
+                </div>
+                <a class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline shrink-0" href="https://github.com/Ishay-Abakeev/C-two-pass-assembler" target="_blank" rel="noopener noreferrer" data-i18n="btnSourceCode">Source code ↗</a>
+              </div>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300" data-i18n="assemblerDeep">The assembler preprocesses macros, resolves symbols in two passes, handles addressing modes, and encodes machine instructions. Custom Trie and Vector structures support the implementation.</p>
+              <div class="mt-4 flex flex-wrap items-center gap-1.5 text-xs font-mono" dir="ltr">
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">Source + Macros</span>
+                <span class="text-indigo-500">→</span>
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">Pass 1 · Symbols</span>
+                <span class="text-indigo-500">→</span>
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">Pass 2 · Encoding</span>
+                <span class="text-indigo-500">→</span>
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">Object Files</span>
+              </div>
+            </div>
+            <p class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400" data-i18n="assemblerTests">Edge cases handled: undefined symbols, duplicate labels, invalid addressing modes, malformed macros, and clean memory deallocation on error.</p>
+          </article>
+
+          <article class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 print-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400" data-i18n="deepTag3">03 · Desktop / Algorithms</p>
+                  <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">Checkers</h3>
+                </div>
+                <a class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline shrink-0" href="https://github.com/Ishay-Abakeev/Checkers" target="_blank" rel="noopener noreferrer" data-i18n="btnSourceCode">Source code ↗</a>
+              </div>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300" data-i18n="checkersDeep">The WinForms interface is separated from game rules, the Minimax opponent, and SQL Server persistence. The application supports human multiplayer, AI play, and stored player statistics.</p>
+              <div class="mt-4 flex flex-wrap items-center gap-1.5 text-xs font-mono" dir="ltr">
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">WinForms UI</span>
+                <span class="text-indigo-500">→</span>
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">Game Logic / Minimax</span>
+                <span class="text-indigo-500">→</span>
+                <span class="rounded-lg bg-slate-100 dark:bg-slate-800 px-2.5 py-1.5">SQL Server DAO</span>
+              </div>
+            </div>
+            <p class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400" data-i18n="checkersTests">Edge cases handled: mandatory multi-jump captures, king promotion rules, terminal board states, and PBKDF2-SHA256 credential verification.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Engineering Discussion Topics -->
+      <div class="mt-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 sm:p-6 print-card">
+        <h3 class="text-base font-bold text-slate-900 dark:text-white" data-i18n="interviewQuestionsTitle">Architectural Discussion Topics</h3>
+        <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="interviewQuestionsIntro">Core engineering trade-offs across these projects that I enjoy discussing in technical interviews:</p>
+        <div class="mt-3 grid md:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-xl bg-slate-50 dark:bg-slate-800/70 p-3.5 border border-slate-100 dark:border-slate-800">
+            <b class="text-indigo-600 dark:text-indigo-400">TokenLearn</b>
+            <p class="mt-1 text-slate-600 dark:text-slate-300" data-i18n="qaToken">Maintaining transactional consistency during token transfers and isolating SQL DAO queries from REST controllers.</p>
+          </div>
+          <div class="rounded-xl bg-slate-50 dark:bg-slate-800/70 p-3.5 border border-slate-100 dark:border-slate-800">
+            <b class="text-indigo-600 dark:text-indigo-400">DefensiveProtocol</b>
+            <p class="mt-1 text-slate-600 dark:text-slate-300" data-i18n="qaProtocol">Framing binary packets between C++ and Python, managing symmetric key exchange, and verifying payload checksums.</p>
+          </div>
+          <div class="rounded-xl bg-slate-50 dark:bg-slate-800/70 p-3.5 border border-slate-100 dark:border-slate-800">
+            <b class="text-indigo-600 dark:text-indigo-400">Two-Pass Assembler</b>
+            <p class="mt-1 text-slate-600 dark:text-slate-300" data-i18n="qaAssembler">Why forward label references require two passes, Trie lookup efficiency, and deterministic memory cleanup in C.</p>
+          </div>
+          <div class="rounded-xl bg-slate-50 dark:bg-slate-800/70 p-3.5 border border-slate-100 dark:border-slate-800">
+            <b class="text-indigo-600 dark:text-indigo-400">Checkers & SecureAuthLab</b>
+            <p class="mt-1 text-slate-600 dark:text-slate-300" data-i18n="qaCheckers">Minimax heuristic evaluation vs. search depth, and benchmarking Argon2id, bcrypt, and PBKDF2-SHA256 latency trade-offs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beyond the 1-Page CV Section -->
+    <section id="beyond" class="py-10 reveal">
+      <div class="mb-6">
+        <span class="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 mb-2" data-i18n="beyondBadge">More Than a 1-Page Resume</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="beyondTitle">Beyond the CV</h2>
+        <p class="mt-1 text-sm text-slate-600 dark:text-slate-400" data-i18n="beyondSubtitle">
+          What didn't fit on a single-page PDF: engineering workflow, teaching impact, and personal drive.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1: AI-Assisted Engineering -->
+        <div class="interactive-card reveal reveal-delay-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white" data-i18n="beyond1Title">AI-Assisted Development & Refactoring</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-i18n="beyond1Desc">
+            Use GitHub Copilot and LLM-based tools as development assistants for exploring solutions and refactoring. I review generated code and remain responsible for understanding and validating the result.
+          </p>
+        </div>
+
+        <!-- Card 2: CS Educator & YouTube Creator -->
+        <div class="interactive-card reveal reveal-delay-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white" data-i18n="beyond2Title">CS Educator & Course Creator ("בדרך ל-100")</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-i18n="beyond2Desc">
+            Built a dedicated learning platform and YouTube channel breaking down Data Structures, Algorithms, Java, C#, and Python for university and high school students—sharpening my ability to explain complex systems clearly.
+          </p>
+        </div>
+
+        <!-- Card 3: Published Author -->
+        <div class="interactive-card reveal reveal-delay-1 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white" data-i18n="beyond3Title">Published Author — 3-Book Trilogy</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-i18n="beyond3Desc">
+            Authored and published a trilogy of books ("ישרים ילכו בה", "קדושת ישרים", "חגיגת ישרים"), demonstrating long-term discipline, structured thinking, and end-to-end execution.
+          </p>
+        </div>
+
+        <!-- Card 4: Calm Under Pressure -->
+        <div class="interactive-card reveal reveal-delay-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white" data-i18n="beyond4Title">Composure in High-Stakes Environments</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-i18n="beyond4Desc">
+            Trained Emergency Medical Responder with United Hatzalah, experienced in rapid triage, clear communication, and decisive action under pressure—qualities I bring to production debugging and incident response.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="py-10 reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white mb-6" data-i18n="skillsTitle">Technical Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 print-card">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3" data-i18n="skillCatLang">Languages</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Java</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">C#</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">C (ANSI C)</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">C++</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Python</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">SQL</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Scheme / Racket</span>
+          </div>
+        </div>
+
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 print-card">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3" data-i18n="skillCatBackend">Backend & Databases</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Spring Framework</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">REST APIs</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">JDBC</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">SQL Server</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Database Design</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">JWT & OAuth 2.0</span>
+          </div>
+        </div>
+
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 print-card">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3" data-i18n="skillCatTools">Frameworks & Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">.NET / WinForms</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">React 19 / Vite</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Git & GitHub</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Linux</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">IntelliJ IDEA</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">GitHub Copilot & LLMs</span>
+          </div>
+        </div>
+
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 print-card">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3" data-i18n="skillCatCore">Core CS & Security</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Data Structures & Algorithms</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">OOP & Layered Architecture</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Multithreading</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Memory Management</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Operating Systems</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">Argon2id / bcrypt / TOTP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education, Experience & Volunteering -->
+    <section id="experience" class="py-10 reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white mb-6" data-i18n="expTitle">Education, Teaching & Volunteering</h2>
+
+      <div class="space-y-4">
+        <!-- Education -->
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 mb-1.5" data-i18n="badgeEdu">Education</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="eduDegree">B.Sc. in Computer Science — The Open University of Israel</h3>
+            </div>
+            <span class="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 shrink-0" data-i18n="eduDate">Graduated July 2026 • GPA: 84</span>
+          </div>
+          <p class="mt-3 text-sm text-slate-600 dark:text-slate-300" data-i18n="eduCoursework">
+            Relevant Coursework: Data Structures & Algorithms, Algorithms, Advanced Java Programming, Systems Programming (C), Operating Systems, Database Systems.
+          </p>
+        </div>
+
+        <!-- Teaching & Course Creation -->
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 mb-1.5" data-i18n="badgeWork">Teaching & Content</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="teachRole">Computer Science & Math Teacher / Private Tutor</h3>
+            </div>
+            <span class="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 shrink-0" data-i18n="teachDate">2023 – Present</span>
+          </div>
+          <ul class="mt-3 space-y-1.5 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+            <li data-i18n="teachB1">Teach middle and high school Computer Science and Mathematics, alongside one-on-one university-level tutoring in Python, Java, C, C++, C#, and Data Structures & Algorithms.</li>
+            <li data-i18n="teachB2">Developed comprehensive exam-prep courses and digital learning materials for Open University CS and high school Bagrut tracks, alongside the educational YouTube channel "בדרך ל-100".</li>
+          </ul>
+        </div>
+
+        <!-- Volunteering -->
+        <div class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 print-card">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 mb-1.5" data-i18n="badgeVol">Volunteering</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="volTitle">Emergency Medical Volunteer — United Hatzalah</h3>
+            </div>
+            <span class="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 shrink-0" data-i18n="volRoleTag">First Responder</span>
+          </div>
+          <p class="mt-2.5 text-sm text-slate-600 dark:text-slate-300" data-i18n="volDesc">
+            Provide rapid on-scene first aid and life-saving support alongside EMS teams in high-pressure emergency situations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-10 reveal">
+      <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 print-card">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="contactTitle">Get in Touch</h2>
+            <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="contactSubtitle">
+              Looking for a motivated Junior Backend or Software Developer? Let's connect.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-4 text-sm text-slate-700 dark:text-slate-300">
+              <span class="inline-flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="font-mono">053-3400746</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span class="font-mono">ishay.abakeev@gmail.com</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span data-i18n="languagesText">Hebrew (Native) • English (Fluent)</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="no-print flex flex-wrap gap-2.5 shrink-0">
+            <button id="copyPhoneBtn" type="button" class="px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" data-i18n="btnCopyPhone">
+              Copy Phone
+            </button>
+            <a href="mailto:ishay.abakeev@gmail.com" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-colors" data-i18n="btnSendEmail">
+              Send Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Project Details Modal -->
+  <div id="projectModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle" aria-describedby="modalSummary">
+    <div id="projectModalPanel" tabindex="-1" class="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <span id="modalBadge" class="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 mb-2"></span>
+          <h3 id="modalTitle" class="text-xl font-bold text-slate-900 dark:text-white"></h3>
+        </div>
+        <button id="closeModalBtn" type="button" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <p id="modalSummary" class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"></p>
+      <div class="mt-5 rounded-xl border border-indigo-100 dark:border-indigo-900/70 bg-indigo-50/70 dark:bg-indigo-950/30 p-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 mb-1" data-i18n="modalRoleLabel">My role</h4>
+        <p id="modalRole" class="text-sm leading-relaxed text-slate-700 dark:text-slate-200"></p>
+      </div>
+      <div class="mt-5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2" data-i18n="modalArchLabel">Engineering highlights</h4>
+        <ul id="modalHighlights" class="space-y-2 text-sm text-slate-700 dark:text-slate-200 list-disc list-inside"></ul>
+      </div>
+      <div class="mt-5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1" data-i18n="modalFlowLabel">Architecture / implementation</h4>
+        <p id="modalArchitecture" class="text-sm leading-relaxed text-slate-600 dark:text-slate-300"></p>
+      </div>
+      <div id="modalStack" class="mt-4 flex flex-wrap gap-1.5"></div>
+      <div class="mt-6 flex flex-wrap items-center justify-end gap-2.5 pt-4 border-t border-slate-200 dark:border-slate-800">
+        <a id="modalDocsLink" href="https://github.com/Ishay-Abakeev/TokenLearn/blob/main/API_REQUESTS.md" target="_blank" rel="noopener noreferrer" class="hidden px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800" data-i18n="btnDocs">Technical docs</a>
+        <button id="modalCloseFooterBtn" type="button" class="px-4 py-2 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800" data-i18n="btnClose">Close</button>
+        <a id="modalRepoLink" href="https://github.com/Ishay-Abakeev" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white" data-i18n="btnOpenRepo">Open Repository</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite" class="no-print fixed bottom-5 right-5 z-50 hidden items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium shadow-lg">
+    <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Copied!</span>
+  </div>
+
+  <script>
+    (function () {
+      const i18n = {
+        en: {
+          brandName: "Ishay Abakeev",
+          skipToContent: "Skip to content",
+          navAbout: "About",
+          navProjects: "Projects",
+          navEngineering: "Engineering",
+          navBeyond: "Beyond CV",
+          navSkills: "Skills",
+          navExperience: "Experience",
+          navContact: "Contact",
+          btnPrint: "Save PDF",
+          availabilityBadge: "Open to Junior Backend / Software Developer Roles",
+          heroName: "Ishay Abakeev",
+          heroRole: "B.Sc. Computer Science Graduate • Backend & Systems Developer",
+          heroBio: "Computer Science graduate from The Open University of Israel with hands-on experience building Java backend APIs, database-driven applications, and systems-level projects. Strong foundation in algorithms, data structures, SQL, authentication, and low-level programming, alongside experience teaching computer science.",
+          btnEmail: "Email Me",
+          btnCopyEmail: "Copy Email",
+          btnCourses: "CS Courses Site",
+          projectsTitle: "Technical Projects",
+          projectsSubtitle: "Selected projects demonstrating backend development, data access, authentication, systems programming, and security.",
+          filterAll: "All projects (6)",
+          filterBackend: "Backend & Web (2)",
+          filterSystems: "Systems & Desktop (2)",
+          filterSecurity: "Security & Protocols (2)",
+          engineeringBadge: "Technical walkthrough",
+          engineeringTitle: "Engineering Deep Dive",
+          engineeringIntro: "A closer look at the architecture of selected projects, the boundaries between components, and key edge cases in each domain.",
+          deepTag1: "01 · Backend / Team project",
+          deepTag2: "02 · Systems / ANSI C",
+          deepTag3: "03 · Desktop / Algorithms",
+          btnApiDocsLink: "API Docs ↗",
+          btnSourceCode: "Source code ↗",
+          tokenDeep: "The backend exposes REST APIs, uses Java with Spring Framework, and separates SQL persistence behind JDBC/DAO. The application includes token-balance operations and JWT / Google OAuth 2.0 authentication for a React client.",
+          designDecision: "Design focus",
+          tokenDecision: "Keeping data access separate from API and business logic, and treating token balance changes as atomic transactional operations.",
+          validationIdeas: "Key edge cases & invariants",
+          tokenTest1: "Reject a transfer when the sender has insufficient token balance.",
+          tokenTest2: "Ensure both balances update atomically together, or roll back on failure.",
+          tokenTest3: "Guard against missing user records and concurrent balance updates.",
+          assemblerDeep: "The assembler preprocesses macros, resolves symbols in two passes, handles addressing modes, and encodes machine instructions. Custom Trie and Vector structures support the implementation.",
+          assemblerTests: "Edge cases handled: undefined symbols, duplicate labels, invalid addressing modes, malformed macros, and clean memory deallocation on error.",
+          checkersDeep: "The WinForms interface is separated from game rules, the Minimax opponent, and SQL Server persistence. The application supports human multiplayer, AI play, and stored player statistics.",
+          checkersTests: "Edge cases handled: mandatory multi-jump captures, king promotion rules, terminal board states, and PBKDF2-SHA256 credential verification.",
+          interviewQuestionsTitle: "Architectural Discussion Topics",
+          interviewQuestionsIntro: "Core engineering trade-offs across these projects that I enjoy discussing in technical interviews:",
+          qaToken: "Maintaining transactional consistency during token transfers and isolating SQL DAO queries from REST controllers.",
+          qaProtocol: "Framing binary packets between C++ and Python, managing symmetric key exchange, and verifying payload checksums.",
+          qaAssembler: "Why forward label references require two passes, Trie lookup efficiency, and deterministic memory cleanup in C.",
+          qaCheckers: "Minimax heuristic evaluation vs. search depth, and benchmarking Argon2id, bcrypt, and PBKDF2-SHA256 latency trade-offs.",
+          beyondBadge: "More Than a 1-Page Resume",
+          beyondTitle: "Beyond the CV",
+          beyondSubtitle: "What didn't fit on a single-page PDF: engineering workflow, teaching impact, and personal drive.",
+          beyond1Title: "AI-Assisted Development & Refactoring",
+          beyond1Desc: "Use GitHub Copilot and LLM-based tools as development assistants for exploring solutions and refactoring. I review generated code and remain responsible for understanding and validating the result.",
+          beyond2Title: "CS Educator & Course Creator (\"בדרך ל-100\")",
+          beyond2Desc: "Built a dedicated learning platform and YouTube channel breaking down Data Structures, Algorithms, Java, C#, and Python for university and high school students—sharpening my ability to explain complex systems clearly.",
+          beyond3Title: "Published Author — 3-Book Trilogy",
+          beyond3Desc: "Authored and published a trilogy of books (\"ישרים ילכו בה\", \"קדושת ישרים\", \"חגיגת ישרים\"), demonstrating long-term discipline, structured thinking, and end-to-end execution.",
+          beyond4Title: "Composure in High-Stakes Environments",
+          beyond4Desc: "Trained Emergency Medical Responder with United Hatzalah, experienced in rapid triage, clear communication, and decisive action under pressure—qualities I bring to production debugging and incident response.",
+          skillsTitle: "Technical Skills",
+          skillCatLang: "Languages",
+          skillCatBackend: "Backend & Databases",
+          skillCatTools: "Frameworks & Tools",
+          skillCatCore: "Core CS & Security",
+          expTitle: "Education, Teaching & Volunteering",
+          badgeEdu: "Education",
+          eduDegree: "B.Sc. in Computer Science — The Open University of Israel",
+          eduDate: "Graduated July 2026 • GPA: 84",
+          eduCoursework: "Relevant Coursework: Data Structures & Algorithms, Algorithms, Advanced Java Programming, Systems Programming (C), Operating Systems, Database Systems.",
+          badgeWork: "Teaching & Content",
+          teachRole: "Computer Science & Math Teacher / Private Tutor",
+          teachDate: "2023 – Present",
+          teachB1: "Teach middle and high school Computer Science and Mathematics, alongside one-on-one university-level tutoring in Python, Java, C, C++, C#, and Data Structures & Algorithms.",
+          teachB2: "Developed comprehensive exam-prep courses and digital learning materials for Open University CS and high school Bagrut tracks, alongside the educational YouTube channel \"בדרך ל-100\".",
+          badgeVol: "Volunteering",
+          volTitle: "Emergency Medical Volunteer — United Hatzalah",
+          volRoleTag: "First Responder",
+          volDesc: "Provide rapid on-scene first aid and life-saving support alongside EMS teams in high-pressure emergency situations.",
+          contactTitle: "Get in Touch",
+          contactSubtitle: "Looking for a motivated Junior Backend or Software Developer? Let's connect.",
+          languagesText: "Hebrew (Native) • English (Fluent)",
+          btnCopyPhone: "Copy Phone",
+          btnSendEmail: "Send Email",
+          modalRoleLabel: "My role",
+          modalArchLabel: "Engineering highlights",
+          modalFlowLabel: "Architecture / implementation",
+          btnDocs: "Technical docs",
+          btnClose: "Close",
+          btnOpenRepo: "Open Repository",
+          btnDetails: "Architecture & Details",
+          btnGitHub: "GitHub",
+          btnLive: "Live Site",
+          copiedEmail: "Email copied to clipboard",
+          copiedPhone: "Phone number copied to clipboard"
+        },
+        he: {
+          brandName: "ישי אבקייב",
+          skipToContent: "דלג לתוכן",
+          navAbout: "אודות",
+          navProjects: "פרויקטים",
+          navEngineering: "עומק הנדסי",
+          navBeyond: "מעבר לקו\"ח",
+          navSkills: "טכנולוגיות",
+          navExperience: "השכלה וניסיון",
+          navContact: "יצירת קשר",
+          btnPrint: "שמירה כ-PDF",
+          availabilityBadge: "פתוח למשרות Junior Backend / Software Developer",
+          heroName: "ישי אבקייב (Ishay Abakeev)",
+          heroRole: "בוגר תואר ראשון במדעי המחשב • מפתח Backend ומערכות",
+          heroBio: "בוגר מדעי המחשב מהאוניברסיטה הפתוחה, עם ניסיון מעשי בפיתוח ממשקי Backend ב-Java, יישומים מבוססי מסדי נתונים ופרויקטים בתכנות מערכות. בעל בסיס חזק באלגוריתמים, מבני נתונים, SQL, מנגנוני אימות ותכנות ברמה נמוכה, לצד ניסיון בהוראת מדעי המחשב.",
+          btnEmail: "שליחת אימייל",
+          btnCopyEmail: "העתקת אימייל",
+          btnCourses: "אתר הקורסים",
+          projectsTitle: "פרויקטים טכנולוגיים",
+          projectsSubtitle: "פרויקטים נבחרים המציגים פיתוח Backend, גישה לנתונים, אימות משתמשים, תכנות מערכות ואבטחה.",
+          filterAll: "כל הפרויקטים (6)",
+          filterBackend: "Backend ו-Web (2)",
+          filterSystems: "מערכות ו-Desktop (2)",
+          filterSecurity: "אבטחה ופרוטוקולים (2)",
+          engineeringBadge: "מבט טכני מעמיק",
+          engineeringTitle: "מאחורי הפרויקטים",
+          engineeringIntro: "מבט על הארכיטקטורה של הפרויקטים המרכזיים, הפרדת השכבות ומקרי הקצה המרכזיים בכל מערכת.",
+          deepTag1: "01 · Backend / פרויקט צוות",
+          deepTag2: "02 · תכנות מערכות / ANSI C",
+          deepTag3: "03 · Desktop / אלגוריתמים",
+          btnApiDocsLink: "תיעוד API ↗",
+          btnSourceCode: "לקוד המקור ↗",
+          tokenDeep: "ה-Backend חושף ממשקי REST, משתמש ב-Java וב-Spring Framework, ומפריד את הגישה ל-SQL באמצעות JDBC/DAO. המערכת כוללת פעולות לשינוי יתרות טוקנים ואימות JWT / Google OAuth 2.0 מול לקוח React.",
+          designDecision: "הדגש התכנוני",
+          tokenDecision: "הפרדת הגישה לנתונים משכבת ה-API והלוגיקה העסקית, והתייחסות לשינוי יתרות הטוקנים כפעולה טרנזקציונית אטומית.",
+          validationIdeas: "מקרי קצה ושמירה על עקביות",
+          tokenTest1: "דחיית העברה כאשר לשולח אין יתרת טוקנים מספקת.",
+          tokenTest2: "וידוא ששתי היתרות מתעדכנות יחד באופן אטומי או מתבטלות במקרה כשל.",
+          tokenTest3: "הגנה מפני משתמשים חסרים ועדכוני יתרה מקבילים.",
+          assemblerDeep: "האסמבלר מבצע עיבוד מקדים למאקרו, פותר סמלים בשני מעברים, מטפל בשיטות מיעון ומקודד הוראות מכונה. המימוש נעזר במבני Trie ו-Vector שנבנו בפרויקט.",
+          assemblerTests: "מקרי קצה מטופלים: סמלים לא מוגדרים, תוויות כפולות, שיטות מיעון לא תקינות, מאקרו פגום ושחרור זיכרון מלא בעת שגיאה.",
+          checkersDeep: "ממשק WinForms מופרד מחוקי המשחק, מיריב ה-Minimax ומשמירת הנתונים ב-SQL Server. האפליקציה תומכת במשחק בין אנשים, במשחק מול AI ובשמירת סטטיסטיקות שחקנים.",
+          checkersTests: "מקרי קצה מטופלים: חובת אכילה כפולה, הכתרת מלכה, זיהוי מצבי סיום משחק ואימות סיסמאות עם PBKDF2-SHA256.",
+          interviewQuestionsTitle: "נושאים לדיון טכני מעמיק",
+          interviewQuestionsIntro: "החלטות תכנוניות ואתגרים הנדסיים מתוך הפרויקטים שאני שמח להציג ולהסביר בראיונות טכניים:",
+          qaToken: "שמירה על עקביות טרנזקציונית בהעברת טוקנים והפרדת שאילתות ה-DAO משכבת ה-REST.",
+          qaProtocol: "בניית פרוטוקול בינארי בין לקוח C++ לשרת Python, החלפת מפתחות סימטרית ואימות Checksum.",
+          qaAssembler: "מדוע הפניות קדימה (Forward References) מחייבות שני מעברים, יעילות החיפוש ב-Trie וניהול זיכרון ב-C.",
+          qaCheckers: "פונקציית ההערכה ב-Minimax מול עומק החיפוש, והשוואת עלויות הגיבוב בין Argon2id, bcrypt ו-PBKDF2.",
+          beyondBadge: "מה שלא נכנס לעמוד אחד",
+          beyondTitle: "מעבר לקורות החיים",
+          beyondSubtitle: "היכולות, הכלים והפרויקטים שמשלימים את התמונה מעבר לדף ה-PDF.",
+          beyond1Title: "פיתוח וריפקטורינג בסיוע AI",
+          beyond1Desc: "שימוש ב-GitHub Copilot ובכלי LLM ככלי עזר לבחינת פתרונות ולריפקטורינג. אני בוחן את הקוד שנוצר ונשאר אחראי להבנתו ולאימות התוצאה.",
+          beyond2Title: "מרצה ויוצר תוכן במדעי המחשב (\"בדרך ל-100\")",
+          beyond2Desc: "הקמתי פלטפורמת קורסים וערוץ יוטיוב שמפשטים מבני נתונים, אלגוריתמים, Java, C# ו-Python לסטודנטים ולתלמידי תיכון — יכולת שמתרגמת היטב להסברת ארכיטקטורות מורכבות בצוות.",
+          beyond3Title: "מחבר טרילוגיית ספרים",
+          beyond3Desc: "כתיבה והוצאה לאור של שלושת הספרים \"ישרים ילכו בה\", \"קדושת ישרים\" ו-\"חגיגת ישרים\" — ביטוי למשמעת עצמית, חשיבה מובנית ויכולת הובלת פרויקטים ארוכי טווח.",
+          beyond4Title: "קור רוח תחת לחץ",
+          beyond4Desc: "חובש מתנדב באיחוד הצלה המנוסה בקבלת החלטות מהירה, תעדוף ותקשורת ברורה במצבי חירום — מיומנויות שמלוות אותי גם בדיבאגינג ותקלות פרודקשן.",
+          skillsTitle: "מיומנויות טכניות",
+          skillCatLang: "שפות תכנות",
+          skillCatBackend: "Backend ומסדי נתונים",
+          skillCatTools: "סביבות וכלים",
+          skillCatCore: "ליבת מדעי המחשב ואבטחה",
+          expTitle: "השכלה, הוראה והתנדבות",
+          badgeEdu: "השכלה",
+          eduDegree: "תואר ראשון B.Sc. במדעי המחשב — האוניברסיטה הפתוחה",
+          eduDate: "סיום יולי 2026 • ציון סופי: 84",
+          eduCoursework: "קורסים מרכזיים: מבני נתונים ואלגוריתמים, אלגוריתמים, תכנות מתקדם ב-Java, תכנות מערכות (C), מערכות הפעלה, מערכות בסיסי נתונים.",
+          badgeWork: "הוראה ופיתוח תוכן",
+          teachRole: "מורה למדעי המחשב ומתמטיקה / מרצה פרטי",
+          teachDate: "2023 – היום",
+          teachB1: "הוראת מדעי המחשב ומתמטיקה בחטיבה ובתיכון, לצד שיעורים פרטיים ברמה אקדמית ב-Python, Java, C, C++, C# ומבני נתונים ואלגוריתמים.",
+          teachB2: "פיתוח קורסי הכנה מקיפים לבגרות ולאוניברסיטה הפתוחה, כולל ערוץ היוטיוב החינוכי \"בדרך ל-100\".",
+          badgeVol: "התנדבות",
+          volTitle: "חובש מתנדב — איחוד הצלה",
+          volRoleTag: "מענה חירום",
+          volDesc: "מתן עזרה ראשונה ומענה מציל חיים בשטח לצד צוותי חירום בתנאי לחץ.",
+          contactTitle: "יצירת קשר",
+          contactSubtitle: "מחפשים מפתח Junior Backend או Software Developer? אשמח לשוחח.",
+          languagesText: "עברית (שפת אם) • אנגלית (שוטפת)",
+          btnCopyPhone: "העתקת טלפון",
+          btnSendEmail: "שליחת מייל",
+          modalRoleLabel: "התפקיד שלי בפרויקט",
+          modalArchLabel: "דגשים הנדסיים",
+          modalFlowLabel: "ארכיטקטורה / אופן המימוש",
+          btnDocs: "תיעוד טכני",
+          btnClose: "סגירה",
+          btnOpenRepo: "למאגר הקוד",
+          btnDetails: "ארכיטקטורה ופרטים",
+          btnGitHub: "GitHub",
+          btnLive: "לאתר",
+          copiedEmail: "כתובת האימייל הועתקה",
+          copiedPhone: "מספר הטלפון הועתק"
+        }
+      };
+
+      const projects = [
+        {
+          id: "tokenlearn",
+          category: "backend",
+          metaEn: "Team of 3 • Backend & Auth",
+          metaHe: "צוות של 3 • Backend ואימות",
+          titleEn: "TokenLearn — Peer-to-Peer Tutoring Platform",
+          titleHe: "TokenLearn — פלטפורמת שיעורים פרטיים",
+          summaryEn: "RESTful backend APIs for a peer-to-peer tutoring platform featuring transactional token-economy logic, decoupled SQL persistence, and secure SPA authentication.",
+          summaryHe: "ממשקי REST לניהול פלטפורמת שיעורים פרטיים מבוססת כלכלת טוקנים טרנזקציונית, שכבת DAO מופרדת ב-Java/SQL ואימות מאובטח.",
+          highlightsEn: [
+            "Engineered RESTful APIs in Java (Spring Framework) with JDBC SQL DAO persistence.",
+            "Implemented transactional token-economy logic ensuring atomic balance updates.",
+            "Integrated JWT-based authentication and Google OAuth 2.0 for a React 19 + Vite SPA."
+          ],
+          highlightsHe: [
+            "פיתוח ממשקי REST ב-Java (Spring Framework) עם שכבת גישה לנתונים מבוססת JDBC ו-SQL.",
+            "מימוש לוגיקת כלכלת טוקנים טרנזקציונית לשמירה על עקביות יתרות.",
+            "שילוב אימות JWT ו-Google OAuth 2.0 מול אפליקציית React 19 + Vite."
+          ],
+          stack: ["Java", "Spring", "JDBC", "SQL", "REST API", "JWT", "OAuth 2.0", "React 19"],
+          roleEn: "Team project (3 contributors). My contribution focused on the Java backend, including REST endpoints, JDBC/DAO data access, database-facing logic, and authentication integration.",
+          roleHe: "פרויקט צוותי (3 משתתפים). התרומה שלי התמקדה בצד השרת ב-Java, כולל ממשקי REST, גישה לנתונים באמצעות JDBC/DAO, לוגיקה מול מסד הנתונים ושילוב מנגנוני אימות.",
+          architectureEn: "React 19 + Vite client → REST API → Java/Spring application layer → JDBC/DAO → SQL database. Password and Google sign-in use an application JWT.",
+          architectureHe: "לקוח React 19 ו-Vite → ממשקי REST → שכבת יישום Java/Spring → JDBC/DAO → מסד נתונים SQL. התחברות בסיסמה וב-Google משתמשת ב-JWT של האפליקציה.",
+          docsUrl: "https://github.com/Ishay-Abakeev/TokenLearn/blob/main/API_REQUESTS.md",
+          url: "https://github.com/Ishay-Abakeev/TokenLearn",
+          isLive: false
+        },
+        {
+          id: "defensiveprotocol",
+          category: "security",
+          metaEn: "C++ & Python • Network Security",
+          metaHe: "C++ ו-Python • פרוטוקול מוצפן",
+          titleEn: "DefensiveProtocol — Encrypted Binary Messaging",
+          titleHe: "DefensiveProtocol — פרוטוקול תקשורת בינארי מאובטח",
+          summaryEn: "Custom binary messaging protocol featuring a Python server and C++ client, implementing secure key exchange, symmetric encryption, and checksum verification.",
+          summaryHe: "פרוטוקול תקשורת בינארי מותאם אישית הכולל שרת Python ולקוח C++, עם החלפת מפתחות מאובטחת, הצפנה סימטרית ואימות Checksum.",
+          highlightsEn: [
+            "Designed a custom binary packet protocol bridging a C++ client and Python server.",
+            "Implemented cryptographic key exchange and symmetric encryption for payload confidentiality.",
+            "Added checksum verification to detect tampering and guarantee message integrity."
+          ],
+          highlightsHe: [
+            "תכנון פרוטוקול תקשורת בינארי מותאם אישית בין לקוח C++ לשרת Python.",
+            "מימוש החלפת מפתחות קריפטוגרפית והצפנה סימטרית להגנה על התעבורה.",
+            "אימות תקינות ושלמות הודעות באמצעות מנגנון Checksum."
+          ],
+          stack: ["C++", "Python", "Binary Protocol", "Encryption", "Key Exchange", "Sockets"],
+          roleEn: "Cross-language client/server project implementing a custom binary communication protocol.",
+          roleHe: "פרויקט לקוח-שרת בשתי שפות, הכולל מימוש פרוטוקול תקשורת בינארי מותאם אישית.",
+          architectureEn: "C++ client ↔ binary message framing ↔ Python server, with key exchange, symmetric encryption, and checksum validation.",
+          architectureHe: "לקוח C++ ↔ מסגור הודעות בינארי ↔ שרת Python, עם החלפת מפתחות, הצפנה סימטרית ואימות Checksum.",
+          url: "https://github.com/Ishay-Abakeev/DefensiveProtocol",
+          isLive: false
+        },
+        {
+          id: "checkers",
+          category: "systems",
+          metaEn: "C# / .NET • AI & SQL Server",
+          metaHe: "C# / .NET • בינה מלאכותית ו-SQL",
+          titleEn: "Checkers Game — Desktop Application",
+          titleHe: "משחק דמקה חכם — אפליקציית Desktop",
+          summaryEn: "Database-driven desktop checkers application supporting human multiplayer and a Minimax AI opponent, with persistent game history and player statistics.",
+          summaryHe: "אפליקציית דסקטופ מבוססת מסד נתונים התומכת במשחק מרובה משתתפים ובשחקן AI מבוסס Minimax, כולל היסטוריית משחקים וסטטיסטיקות.",
+          highlightsEn: [
+            "Layered architecture cleanly separating UI (WinForms), game rules, Minimax AI, and SQL Server data access.",
+            "Implemented PBKDF2-SHA256 password hashing for secure user authentication.",
+            "Persisted match history, leaderboards, and player stats in a relational SQL database."
+          ],
+          highlightsHe: [
+            "ארכיטקטורה שכבתית המפרידה בין ממשק המשתמש (WinForms), חוקי המשחק, מנוע Minimax וגישה ל-SQL Server.",
+            "אבטחת סיסמאות באמצעות PBKDF2-SHA256.",
+            "שמירת היסטוריית משחקים וסטטיסטיקות שחקנים במסד נתונים רלציוני."
+          ],
+          stack: ["C#", ".NET", "WinForms", "SQL Server", "Minimax AI", "PBKDF2-SHA256"],
+          roleEn: "Desktop application project combining game logic, an AI opponent, authentication, and persistent data.",
+          roleHe: "פרויקט Desktop המשלב לוגיקת משחק, יריב מבוסס AI, אימות משתמשים ושמירת נתונים.",
+          architectureEn: "WinForms UI → game-flow and game-logic components → Minimax decision-making; SQL Server stores users, scores, and match history.",
+          architectureHe: "ממשק WinForms → רכיבי ניהול זרימת המשחק והלוגיקה → קבלת החלטות באמצעות Minimax; ‏SQL Server שומר משתמשים, תוצאות והיסטוריית משחקים.",
+          url: "https://github.com/Ishay-Abakeev/Checkers",
+          isLive: false
+        },
+        {
+          id: "assembler",
+          category: "systems",
+          metaEn: "ANSI C • Linux • Grade: 100",
+          metaHe: "ANSI C • Linux • ציון: 100",
+          titleEn: "Two-Pass Assembler in ANSI C",
+          titleHe: "אסמבלר דו-מעברי ב-ANSI C",
+          summaryEn: "Cross-platform two-pass assembler simulator in ANSI C translating custom assembly language into binary machine code with strict manual memory management.",
+          summaryHe: "סימולטור אסמבלר דו-מעברי חוצה-פלטפורמות ב-ANSI C המתרגם שפת סף לקוד מכונה בינארי עם ניהול זיכרון קפדני.",
+          highlightsEn: [
+            "Built macro pre-processing, two-pass symbol-table resolution, addressing modes, and binary machine code encoding.",
+            "Implemented custom Trie and dynamic Vector data structures in ANSI C.",
+            "Achieved a 100/100 final grade with modular C architecture and clean memory handling."
+          ],
+          highlightsHe: [
+            "מימוש מעבד מאקרו, טבלת סמלים דו-מעברית, שיטות מיעון וקידוד לקוד מכונה בינארי.",
+            "בניית מבני נתונים מותאמים אישית (Trie ו-Vector) ב-ANSI C.",
+            "ציון 100 במעבדה לתכנות מערכות עם ארכיטקטורה מודולרית וניהול זיכרון נקי."
+          ],
+          stack: ["ANSI C", "Linux", "Tries & Vectors", "Memory Management", "GCC"],
+          roleEn: "Academic team project (2 contributors); final course grade: 100.",
+          roleHe: "פרויקט אקדמי בזוג; ציון סופי בקורס: 100.",
+          architectureEn: "Macro preprocessor → first pass and symbol-table construction → second pass and machine-code encoding.",
+          architectureHe: "קדם-מעבד מאקרו → מעבר ראשון ובניית טבלת סמלים → מעבר שני וקידוד לקוד מכונה.",
+          url: "https://github.com/Ishay-Abakeev/C-two-pass-assembler",
+          isLive: false
+        },
+        {
+          id: "secureauth",
+          category: "security",
+          metaEn: "Python • Authentication Lab",
+          metaHe: "Python • מעבדת אבטחה",
+          titleEn: "SecureAuthLab — Auth Defense Benchmarking",
+          titleHe: "SecureAuthLab — מעבדת הגנות אימות",
+          summaryEn: "Python security lab evaluating authentication mechanisms, password hashing (SHA-256, bcrypt, Argon2id), 2FA/TOTP, and defense strategies against online attacks.",
+          summaryHe: "מעבדת אבטחה ב-Python להערכת מנגנוני אימות, אלגוריתמי גיבוב סיסמאות (SHA-256, bcrypt, Argon2id), אימות דו-שלבי (TOTP) והגנה מפני תקיפות מקוונות.",
+          highlightsEn: [
+            "Benchmarked SHA-256, bcrypt, and Argon2id hashing cost vs. latency trade-offs.",
+            "Implemented and tested 2FA/TOTP workflows, rate limiting, and account lockout strategies.",
+            "Evaluated defense effectiveness against brute-force and credential-stuffing attacks."
+          ],
+          highlightsHe: [
+            "השוואת ביצועים ועלויות חישוב בין SHA-256, bcrypt ו-Argon2id.",
+            "מימוש ובדיקה של אימות דו-שלבי (2FA/TOTP), הגבלת קצב ונעילת חשבונות.",
+            "הערכת אפקטיביות ההגנות מול מתקפות Brute-Force."
+          ],
+          stack: ["Python", "Argon2id", "bcrypt", "SHA-256", "2FA / TOTP", "Rate Limiting"],
+          roleEn: "Python security project exploring authentication mechanisms and online-attack defenses.",
+          roleHe: "פרויקט אבטחה ב-Python הבוחן מנגנוני אימות והגנות מפני מתקפות מקוונות.",
+          architectureEn: "A focused authentication lab comparing password-hashing choices and evaluating layered defenses such as TOTP, rate limiting, and account lockout.",
+          architectureHe: "מעבדת אימות המשווה בין אלגוריתמים לגיבוב סיסמאות ובוחנת הגנות בשכבות כגון TOTP, הגבלת קצב ונעילת חשבון.",
+          url: "https://github.com/Ishay-Abakeev/SecureAuthLab",
+          isLive: false
+        },
+        {
+          id: "courses",
+          category: "backend",
+          metaEn: "Live Platform • EdTech",
+          metaHe: "אתר פעיל • טכנולוגיות למידה",
+          titleEn: "CS & Math Courses Platform",
+          titleHe: "פלטפורמת הקורסים — בדרך ל-100",
+          summaryEn: "Production GitHub Pages portal serving Open University Computer Science and high school Bagrut prep courses, scheduling, and trial materials.",
+          summaryHe: "אתר פרודקשן ב-GitHub Pages המרכז קורסי הכנה במדעי המחשב ומתמטיקה לאוניברסיטה הפתוחה ולבגרות, מערכת זימון תורים וחומרי לימוד.",
+          highlightsEn: [
+            "Covers Open University CS tracks and Bagrut Unit 4/5 exams in Java, C#, Python, and Algorithms.",
+            "Integrated booking workflows and structured course catalogs.",
+            "Built for fast mobile loading and clear student onboarding."
+          ],
+          highlightsHe: [
+            "מרכז קורסים לאוניברסיטה הפתוחה ולבגרות ב-Java, C#, Python ואלגוריתמים.",
+            "משלב תיאום שיעורים, חומרי התנסות וקטלוג מסודר.",
+            "מותאם לטעינה מהירה ולחוויית משתמש נקייה במובייל ובדסקטופ."
+          ],
+          stack: ["HTML5", "CSS / Tailwind", "JavaScript", "GitHub Pages"],
+          roleEn: "Built and maintain a live educational website for students.",
+          roleHe: "פיתוח ותחזוקה של אתר לימודי פעיל לתלמידים ולסטודנטים.",
+          architectureEn: "Static site hosted on GitHub Pages, organized around course information, learning materials, and student contact and booking flows.",
+          architectureHe: "אתר סטטי המתארח ב-GitHub Pages ומאורגן סביב מידע על קורסים, חומרי לימוד ותהליכי יצירת קשר ותיאום.",
+          url: "https://ishay-abakeev.github.io/courses",
+          isLive: true
+        }
+      ];
+
+      let currentLang = "en";
+      let currentFilter = "all";
+
+      const projectsGrid = document.getElementById("projectsGrid");
+      const modal = document.getElementById("projectModal");
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toastMsg");
+      const scrollProgress = document.getElementById("scrollProgress");
+      let toastTimer = null;
+
+      function showToast(msg) {
+        toastMsg.textContent = msg;
+        toast.classList.remove("hidden");
+        toast.classList.add("flex");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add("hidden");
+          toast.classList.remove("flex");
+        }, 2400);
+      }
+
+      function copyText(text, successMsg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(() => fallbackCopy(text, successMsg));
+        } else {
+          fallbackCopy(text, successMsg);
+        }
+      }
+
+      function fallbackCopy(text, successMsg) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast(successMsg);
+        } catch (e) {
+          showToast(text);
+        }
+        document.body.removeChild(ta);
+      }
+
+      function renderProjects() {
+        const t = i18n[currentLang];
+        const filtered = currentFilter === "all" ? projects : projects.filter(p => p.category === currentFilter);
+        document.querySelectorAll(".filter-btn").forEach(button => {
+          button.setAttribute("aria-pressed", String(button.getAttribute("data-filter") === currentFilter));
+        });
+        projectsGrid.innerHTML = filtered.map(p => {
+          const title = currentLang === "he" ? p.titleHe : p.titleEn;
+          const meta = currentLang === "he" ? p.metaHe : p.metaEn;
+          const summary = currentLang === "he" ? p.summaryHe : p.summaryEn;
+          const linkLabel = p.isLive ? t.btnLive : t.btnGitHub;
+          const pills = p.stack.slice(0, 6).map(s => `<span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${s}</span>`).join("");
+          return `
+            <article class="interactive-card rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-700 print-card">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400">${meta}</span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">${title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">${summary}</p>
+                <div class="mt-4 flex flex-wrap gap-1.5">${pills}</div>
+              </div>
+              <div class="no-print mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                <button type="button" data-project-id="${p.id}" class="open-modal-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/80 transition-colors">
+                  ${t.btnDetails}
+                </button>
+                <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                  <span>${linkLabel}</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </article>
+          `;
+        }).join("");
+      }
+
+      let modalReturnFocus = null;
+      function openProjectModal(projectId, trigger = null) {
+        const p = projects.find(item => item.id === projectId);
+        if (!p) return;
+        const t = i18n[currentLang];
+        modalReturnFocus = trigger || document.activeElement;
+        document.getElementById("modalBadge").textContent = currentLang === "he" ? p.metaHe : p.metaEn;
+        document.getElementById("modalTitle").textContent = currentLang === "he" ? p.titleHe : p.titleEn;
+        document.getElementById("modalSummary").textContent = currentLang === "he" ? p.summaryHe : p.summaryEn;
+        document.getElementById("modalRole").textContent = currentLang === "he" ? (p.roleHe || p.roleEn || "") : (p.roleEn || p.roleHe || "");
+        document.getElementById("modalArchitecture").textContent = currentLang === "he" ? (p.architectureHe || p.architectureEn || "") : (p.architectureEn || p.architectureHe || "");
+
+        const highlights = currentLang === "he" ? p.highlightsHe : p.highlightsEn;
+        const highlightsList = document.getElementById("modalHighlights");
+        highlightsList.replaceChildren();
+        highlights.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          highlightsList.appendChild(li);
+        });
+
+        const stack = document.getElementById("modalStack");
+        stack.replaceChildren();
+        p.stack.forEach(item => {
+          const tag = document.createElement("span");
+          tag.className = "px-2.5 py-1 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300";
+          tag.textContent = item;
+          stack.appendChild(tag);
+        });
+
+        const repoLink = document.getElementById("modalRepoLink");
+        repoLink.href = p.url;
+        repoLink.textContent = p.isLive ? t.btnLive : t.btnOpenRepo;
+        const docsLink = document.getElementById("modalDocsLink");
+        if (p.docsUrl) {
+          docsLink.href = p.docsUrl;
+          docsLink.classList.remove("hidden");
+        } else {
+          docsLink.classList.add("hidden");
+        }
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        document.getElementById("closeModalBtn").focus();
+      }
+
+      function closeProjectModal() {
+        if (modal.classList.contains("hidden")) return;
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        if (modalReturnFocus && typeof modalReturnFocus.focus === "function") modalReturnFocus.focus();
+      }
+
+      function applyLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+        document.getElementById("langToggle").setAttribute("aria-pressed", String(lang === "he"));
+        try { localStorage.setItem("cv_lang", lang); } catch (e) {}
+        const t = i18n[lang];
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (t[key]) el.textContent = t[key];
+        });
+        renderProjects();
+      }
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        document.getElementById("themeToggle").setAttribute("aria-pressed", String(theme === "dark"));
+        try { localStorage.setItem("cv_theme", theme); } catch (e) {}
+      }
+
+      // Scroll Progress & Scroll-Spy
+      const navLinks = document.querySelectorAll("#desktopNav .nav-link");
+      const sections = document.querySelectorAll("main section[id]");
+
+      function onScroll() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+        scrollProgress.style.width = pct + "%";
+
+        let activeId = "about";
+        sections.forEach(sec => {
+          const top = sec.offsetTop - 120;
+          if (scrollTop >= top) activeId = sec.id;
+        });
+        navLinks.forEach(link => {
+          const target = link.getAttribute("href").slice(1);
+          if (target === activeId) {
+            link.classList.add("text-indigo-600", "dark:text-indigo-400", "font-semibold");
+          } else {
+            link.classList.remove("text-indigo-600", "dark:text-indigo-400", "font-semibold");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // Scroll Reveal Observer
+      const revealEls = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+        revealEls.forEach(el => observer.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add("is-visible"));
+      }
+
+      // Init Theme
+      let savedTheme = "light";
+      try {
+        savedTheme = localStorage.getItem("cv_theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (e) {}
+      applyTheme(savedTheme);
+
+      // Event Listeners
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const next = document.documentElement.classList.contains("dark") ? "light" : "dark";
+        applyTheme(next);
+      });
+
+      document.getElementById("langToggle").addEventListener("click", () => {
+        applyLanguage(currentLang === "en" ? "he" : "en");
+      });
+
+      document.getElementById("printBtn").addEventListener("click", () => window.print());
+      document.getElementById("mobilePrintBtn").addEventListener("click", () => window.print());
+
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      function setMobileMenuOpen(open) {
+        mobileMenu.classList.toggle("hidden", !open);
+        mobileMenu.hidden = !open;
+        mobileMenuBtn.setAttribute("aria-expanded", String(open));
+        mobileMenuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+      mobileMenuBtn.addEventListener("click", () => setMobileMenuOpen(mobileMenu.classList.contains("hidden")));
+      document.querySelectorAll(".mobile-nav-link").forEach(link => link.addEventListener("click", () => setMobileMenuOpen(false)));
+
+      document.getElementById("copyEmailBtn").addEventListener("click", () => {
+        copyText("ishay.abakeev@gmail.com", i18n[currentLang].copiedEmail);
+      });
+      document.getElementById("copyPhoneBtn").addEventListener("click", () => {
+        copyText("053-3400746", i18n[currentLang].copiedPhone);
+      });
+
+      document.getElementById("projectFilters").addEventListener("click", (e) => {
+        const btn = e.target.closest(".filter-btn");
+        if (!btn) return;
+        currentFilter = btn.getAttribute("data-filter");
+        document.querySelectorAll(".filter-btn").forEach(b => {
+          b.classList.remove("bg-white", "dark:bg-slate-900", "text-slate-900", "dark:text-white", "shadow-sm");
+          b.classList.add("text-slate-600", "dark:text-slate-300");
+        });
+        btn.classList.add("bg-white", "dark:bg-slate-900", "text-slate-900", "dark:text-white", "shadow-sm");
+        btn.classList.remove("text-slate-600", "dark:text-slate-300");
+        renderProjects();
+      });
+
+      projectsGrid.addEventListener("click", (e) => {
+        const btn = e.target.closest(".open-modal-btn");
+        if (btn) openProjectModal(btn.getAttribute("data-project-id"), btn);
+      });
+
+      document.getElementById("closeModalBtn").addEventListener("click", closeProjectModal);
+      document.getElementById("modalCloseFooterBtn").addEventListener("click", closeProjectModal);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeProjectModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (modal.classList.contains("hidden")) return;
+        if (e.key === "Escape") { closeProjectModal(); return; }
+        if (e.key === "Tab") {
+          const focusable = [...modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')].filter(el => el.offsetParent !== null);
+          if (!focusable.length) { e.preventDefault(); modal.focus(); return; }
+          const first = focusable[0], last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      let savedLanguage = "en";
+      try { savedLanguage = localStorage.setItem("cv_lang") || "en"; } catch (e) {}
+      applyLanguage(savedLanguage === "he" ? "he" : "en");
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
